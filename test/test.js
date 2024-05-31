@@ -109,6 +109,13 @@ describe("MyTest", function () {
           myTest.connect(otherAccount).withdraw()
         ).to.be.revertedWith("You are not an owner");
       });
+
+      it("Should not fail if the unlockTime has arrived and the owner calls it", async function () {
+        const { myTest, unlockedTime } = await loadFixture(runEveryTime);
+
+        await time.increaseTo(unlockedTime);
+        await expect(myTest.withdraw()).not.to.be.reverted;
+      });
     });
   });
 
