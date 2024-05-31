@@ -86,5 +86,17 @@ describe("MyTest", function () {
     });
   });
 
+  describe("Withdrawals", function () {
+    describe("Validations", function () {
+      it("Should revert with the right if called to soon", async function () {
+        const { myTest } = await loadFixture(runEveryTime);
+
+        await expect(myTest.withdraw()).to.be.revertedWith(
+          "Wait till the time period completed"
+        );
+      });
+    });
+  });
+
   runEveryTime();
 });
