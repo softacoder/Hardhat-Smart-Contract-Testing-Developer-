@@ -119,5 +119,20 @@ describe("MyTest", function () {
     });
   });
 
+  //NOW LETS CHECK FOR EVENTS
+  describe("EVENTS", function () {
+    it("Should emit the event on withdrawals", async function () {
+      const { myTest, unlockedTime, lockedAmount } = await loadFixture(
+        runEveryTime
+      );
+
+      await time.increaseTo(unlockedTime);
+
+      await expect(myTest.withdraw())
+        .to.emit(myTest, "Withdrawal")
+        .withArgs(lockedAmount, anyValue);
+    });
+  });
+
   runEveryTime();
 });
