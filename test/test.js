@@ -49,6 +49,28 @@ describe("MyTest", function () {
       //   console.log(myTest);
 
       expect(await myTest.unlockedTime()).to.equal(unlockedTime);
+      //   const ab = expect(await myTest.unlockedTime()).to.equal(unlockedTime);
+      //   console.log(ab);
+    });
+
+    // CHECKING OWNER
+    it("Should set the right owner", async function () {
+      const { myTest, owner } = await loadFixture(runEveryTime);
+
+      expect(await myTest.owner()).to.equal(owner.address);
+    });
+
+    // CHECKING THE BALANCE
+    it("Should receive and store the funds to MyTest", async function () {
+      const { myTest, lockedAmount } = await loadFixture(runEveryTime);
+
+      // // console.log(lockedAmount);
+      // const contractBal = await ethers.provider.getBalance(myTest.address);
+      // console.log(contractBal.toNumber());
+
+      expect(await ethers.provider.getBalance(myTest.address)).to.equal(
+        lockedAmount
+      );
     });
   });
 
