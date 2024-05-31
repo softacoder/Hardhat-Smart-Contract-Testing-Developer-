@@ -101,8 +101,13 @@ describe("MyTest", function () {
           runEveryTime
         );
 
-        const newTime = await time.increaseTo(unlockedTime);
-        console.log(newTime);
+        // const newTime = await time.increaseTo(unlockedTime);
+        // console.log(newTime);
+
+        await time.increaseTo(unlockedTime);
+        await expect(
+          myTest.connect(otherAccount).withdraw()
+        ).to.be.revertedWith("You are not an owner");
       });
     });
   });
