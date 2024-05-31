@@ -76,7 +76,13 @@ describe("MyTest", function () {
     // CONDITION TEST
     it("Should fail if the unlocked is not in the future", async function () {
       const latestTime = await time.latest();
-      console.log(latestTime / 60 / 60 / 60 / 24);
+      // console.log(latestTime / 60 / 60 / 60 / 24);
+
+      const MyTest = await ethers.getContractFactory("MyTest");
+
+      await expect(MyTest.deploy(latestTime, { value: 1 })).to.be.revertedWith(
+        "Unlocked time should be in future"
+      );
     });
   });
 
