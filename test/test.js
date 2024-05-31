@@ -32,10 +32,11 @@ describe("MyTest", function () {
     // console.log(owner);
     // console.log(otherAccount);
 
+    console.log("hey");
     const MyTest = await ethers.getContractFactory("MyTest");
     const myTest = await MyTest.deploy(unlockedTime, { value: lockedAmount });
 
-    console.log(myTest, unlockedTime, lockedAmount, owner, otherAccount);
+    // console.log(myTest, unlockedTime, lockedAmount, owner, otherAccount);
 
     return { myTest, unlockedTime, lockedAmount, owner, otherAccount };
   }
@@ -43,6 +44,11 @@ describe("MyTest", function () {
   describe("Deployment", function () {
     it("Should check unlocked time", async function () {
       const { myTest, unlockedTime } = await loadFixture(runEveryTime);
+
+      //   console.log(unlockedTime);
+      //   console.log(myTest);
+
+      expect(await myTest.unlockedTime()).to.equal(unlockedTime);
     });
   });
 
