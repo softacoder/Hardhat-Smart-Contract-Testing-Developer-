@@ -30,12 +30,13 @@ async function main() {
 
   const lockedAmount = hre.ethers.utils.parseEther("1");
 
-  // const MyTest = await hre.ethers.getContractFactory("MyTest");
-  // const myTest = await MyTest.deploy(unlockedTime, { value: lockedAmount });
-
-  // await myTest.deployed();
-
   // console.log(lockedAmount);
+  const MyTest = await hre.ethers.getContractFactory("MyTest");
+  const myTest = await MyTest.deploy(unlockedTime, { value: lockedAmount });
+
+  await myTest.deployed();
+  console.log(`Contract contain 1 ETH & address: ${myTest.address}`);
+  console.log(myTest);
 }
 
 main().catch((error) => {
