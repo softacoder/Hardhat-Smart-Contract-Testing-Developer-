@@ -72,6 +72,12 @@ describe("MyTest", function () {
         lockedAmount
       );
     });
+
+    // CONDITION TEST
+    it("Should fail if the unlocked is not in the future", async function () {
+      const latestTime = await time.latest();
+      console.log(latestTime / 60 / 60 / 60 / 24);
+    });
   });
 
   runEveryTime();
