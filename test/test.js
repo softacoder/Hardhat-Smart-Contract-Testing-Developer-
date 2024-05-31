@@ -134,5 +134,20 @@ describe("MyTest", function () {
     });
   });
 
+  //TRANSFER
+  describe("Transfer", async function () {
+    it("Should transfer the funds to the owner", async function () {
+      const { myTest, unlockedTime, lockedAmount, owner } = await loadFixture(
+        runEveryTime
+      );
+
+      await time.increaseTo(unlockedTime);
+      await expect(myTest.withdraw()).to.changeEtherBalances(
+        [owner, myTest],
+        [lockedAmount, -lockedAmount]
+      );
+    });
+  });
+
   runEveryTime();
 });
