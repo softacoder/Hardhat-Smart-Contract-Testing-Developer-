@@ -95,6 +95,15 @@ describe("MyTest", function () {
           "Wait till the time period completed"
         );
       });
+
+      it("Should revert the message for right owner", async function () {
+        const { myTest, unlockedTime, otherAccount } = await loadFixture(
+          runEveryTime
+        );
+
+        const newTime = await time.increaseTo(unlockedTime);
+        console.log(newTime);
+      });
     });
   });
 
